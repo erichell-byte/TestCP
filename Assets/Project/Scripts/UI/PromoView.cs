@@ -45,7 +45,7 @@ namespace RedPanda.Project.UI
         private void Init()
         {
             FillPromoLists();
-            SortPromoListByRarity();
+            SortAllPromoListByRarity();
             ShowPromoItems();
         }
         
@@ -70,15 +70,20 @@ namespace RedPanda.Project.UI
             }
         }
         
-        private void SortPromoListByRarity()
+        private void SortAllPromoListByRarity()
         {
-            _chests = _chests.OrderBy(e => e.Rarity).ToList();
-            _chests.Reverse();
-            _crystals = _crystals.OrderBy(e => e.Rarity).ToList();
-            _crystals.Reverse();
-            _specials = _specials.OrderBy(e => e.Rarity).ToList();
-            _specials.Reverse();
+            SortListByRarity(ref _chests);
+            SortListByRarity(ref _crystals);
+            SortListByRarity(ref _specials);
         }
+
+        private void SortListByRarity(ref List<IPromoModel> list)
+        {
+            list = list.OrderBy(e => e.Rarity).ToList();
+            list.Reverse();
+        }
+        
+        
         
         private void ShowPromoItems()
         {
